@@ -89,4 +89,4 @@ client.on("message", message =>{
 
 });
 
-client.login(process.env.B0T_TOKEN)
+client.login(token)
