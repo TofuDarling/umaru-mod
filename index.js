@@ -15,7 +15,7 @@ client.on('ready', ()=> {
         message.channel.send("You are currently running version 0.2!")
     })
     command(client, 'help', (message) =>{
-        message.channel.send("My current commands are: ?ping, ?version, ?servers, ?cc/clearchannel)")
+        message.channel.send("My current commands are: ?ping, ?version, ?servers, ?cc/clearchannel), ?ban, ?kick")
     })
     command(client, 'servers', (message) => {
         client.guilds.cache.forEach((guild) => {
