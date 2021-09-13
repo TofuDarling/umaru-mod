@@ -7,15 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js"
-    
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-  },
+  "bugs": {},
   "dependencies": {
     "discord.js": "^12.5.3",
+    "mongoose": "^5.13.7",
     "nodemon": "^2.0.12"
   }
 }
