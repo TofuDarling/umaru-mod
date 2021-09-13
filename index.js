@@ -117,7 +117,7 @@ client.on('ready', async ()=> {
       }
     })
     command(client, 'createvoicechannel', (message) => {
-      const name = message.content.replace('!createvoicechannel ', '')
+      const name = message.content.replace('?createvoicechannel ', '')
       if (message.member.hasPermission('ADMINISTRATOR')) {
       message.guild.channels
         .create(name, {
