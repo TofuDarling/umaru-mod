@@ -103,7 +103,7 @@ client.on('ready', async ()=> {
     })
     command(client, 'createtextchannel', (message) => {
       const name = message.content.replace('?createtextchannel ', '')
-  
+      if (message.member.hasPermission('ADMINISTRATOR')) {
       message.guild.channels
         .create(name, {
           type: 'text',
@@ -112,10 +112,13 @@ client.on('ready', async ()=> {
           const categoryId = '719799253706342421'
           channel.setParent(categoryId)
         })
+      } else {
+        message.channel.send("Oi! Looks like you dont have perms!")
+      }
     })
     command(client, 'createvoicechannel', (message) => {
       const name = message.content.replace('!createvoicechannel ', '')
-  
+      if (message.member.hasPermission('ADMINISTRATOR')) {
       message.guild.channels
         .create(name, {
           type: 'voice',
@@ -125,9 +128,12 @@ client.on('ready', async ()=> {
           channel.setParent(categoryId)
           channel.setUserLimit(10)
         })
+      } else {
+        message.channel.send("Oi! Looks like you dont have perms!")
+      }
     })
     command(client, 'whoiscurrynoodles', (message) => {
-      message.channel.send("A very cracked player :3. yt: ")
+      message.channel.send("A very cracked player :3. ")
     })
     command(client, 'whoisaqxa', (message) => {
       message.channel.send("Hes my dad. He is very cracked at bedwars... and if u dont think so... o-o")
