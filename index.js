@@ -42,6 +42,17 @@ client.on('ready', async ()=> {
          })
         }
       })
+    
+      command(client, 'status', (message) => {
+        const content = message.content.replace('?status ', '')
+    
+        client.user.setPresence({
+          activity: {
+            name: content,
+            type: 0,
+          },
+        })
+      })
     })
     command(client, 'ban', (message) => {
       const { member, mentions } = message
@@ -116,7 +127,7 @@ client.on('ready', async ()=> {
         })
     })
     command(client, 'whoiscurrynoodles', (message) => {
-      message.channel.send("A very cracked player :3. yt: currynoodles")
+      message.channel.send("A very cracked player :3. yt: ")
     })
     command(client, 'whoisaqxa', (message) => {
       message.channel.send("Hes my dad. He is very cracked at bedwars... and if u dont think so... o-o")
