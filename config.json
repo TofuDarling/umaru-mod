@@ -1,5 +1,5 @@
 {
     "token": "NzY2NzY3OTAzNTA4NjYwMzE2.X4oKQg.PwhpQWIKCM_xhR_tdWCO_4UMg38",
     "prefix": "?",
-    "mongoPath": "mongodb+srv://AdminAqxa:uI4AbsvUz8x86ZTj@cluster0.b1ukg.mongodb.net/test?authSource=admin&replicaSet=atlas-ssaojh-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true"
+    "mongoPath": "mongodb+srv://AdminAqxa:uI4AbsvUz8x86ZTj@cluster0.b1ukg.mongodb.net/discordBot"
 }

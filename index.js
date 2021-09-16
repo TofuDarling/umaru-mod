@@ -3,18 +3,23 @@ const client = new Discord.Client()
 const config = require('./config.json')
 const command = require('./command')
 const mongo = require('./mongo')
+const welcome = require('./welcome')
 
 console.clear()
 
 client.on('ready', async ()=> {
     console.log('Umaru Is Online!')
-    
+
+    welcome(client)
+
     await mongo().then(mongoose => {
       try {
         console.log('Connected To MongoDB!')
       } finally {
         mongoose.connection.close()
       }
+
+      
     })
   
 
@@ -25,7 +30,7 @@ client.on('ready', async ()=> {
         message.channel.send("You are currently running version 0.2!")
     })
     command(client, 'help', (message) =>{
-        message.channel.send("My current commands are: ?ping, ?version, ?servers, ?cc/clearchannel), ?ban, ?kick, ?createtextchannel, ?createvoicechannel.")
+        message.channel.send("My current commands are: ?ping, ?version, ?servers, ?cc/clearchannel), ?ban, ?kick, ?createtextchannel, ?createvoicechannel, ?setwelcome.")
     })
     command(client, 'servers', (message) => {
         client.guilds.cache.forEach((guild) => {
