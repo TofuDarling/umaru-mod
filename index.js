@@ -4,6 +4,8 @@ const config = require('./config.json')
 const command = require('./command')
 const mongo = require('./mongo')
 const welcome = require('./welcome')
+const messageCount = require('./message-counter')
+
 
 console.clear()
 
@@ -11,6 +13,7 @@ client.on('ready', async ()=> {
     console.log('Umaru Is Online!')
 
     welcome(client)
+    messageCount(client)
 
     await mongo().then(mongoose => {
       try {
@@ -145,9 +148,9 @@ client.on('ready', async ()=> {
     })
     command(client, 'urmum', (message) => {
       message.channel.send("Your mums house ;)")
-    })
-    command(client, 'whoistom', (message) => {
-      message.channel.send("Hes the most epik gamer. he makes tik tok vids! check him out at @beasn!")
-    })
+    }) 
+    
+
+    
     
 client.login(config.token)
