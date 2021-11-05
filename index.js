@@ -1,39 +1,78 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('./config.json')
+
+const antiad = require('./anti-ad')
 const command = require('./command')
 const mongo = require('./mongo')
 const welcome = require('./welcome')
 const messageCount = require('./message-counter')
+const mute = require('./mute')
+const path = require('path')
+const fs = require('fs')
+
 
 
 console.clear()
 
 client.on('ready', async ()=> {
     console.log('Umaru Is Online!')
+    const baseFile = 'command-base.js'
+    const commandBase = require(`./commands/${baseFile}`)
+  
+    const readCommands = (dir) => {
+      const files = fs.readdirSync(path.join(__dirname, dir))
+      for (const file of files) {
+        const stat = fs.lstatSync(path.join(__dirname, dir, file))
+        if (stat.isDirectory()) {
+          readCommands(path.join(dir, file))
+        } else if (file !== baseFile) {
+          const option = require(path.join(__dirname, dir, file))
+          commandBase(client, option)
+        }
+      }
+    }
+
+    readCommands('commands')
+
 
     welcome(client)
     messageCount(client)
+    mute(client)
+    antiad(client)
 
     await mongo().then(mongoose => {
       try {
         console.log('Connected To MongoDB!')
       } finally {
-        mongoose.connection.close()
       }
 
       
     })
   
 
-    command(client, 'ping', message =>{
-        message.channel.send("Pong!")
-    }) 
+
     command(client, 'version', message => {
-        message.channel.send("You are currently running version 0.2!")
+        message.channel.send("You are currently running version 0.3!")
     })
-    command(client, 'help', (message) =>{
-        message.channel.send("My current commands are: ?ping, ?version, ?servers, ?cc/clearchannel), ?ban, ?kick, ?createtextchannel, ?createvoicechannel, ?setwelcome.")
+    command(client, 'help', message => {
+      const embed = new Discord.MessageEmbed()
+        .setTitle("Umaru's Commands!")
+        .setFooter("Note: These are commands as of version 0.3!")
+        .setColor(`#FFA500`)
+        .addFields({
+          name: 'Moderation Commands',
+          value: '?kick, ?mute, ?unmute, ?ban, ?cc/clearchannel',
+        },
+        {
+          name: 'Info Commands',
+          value: '?ping, ?version, ?servers',
+        },
+        {
+          name: 'Administrator Commands', 
+          value:'?createvoicechannel, ?createtextchannel, ?setwelcome'
+        })
+        message.channel.send(embed)
     })
     command(client, 'servers', (message) => {
         client.guilds.cache.forEach((guild) => {
@@ -42,7 +81,7 @@ client.on('ready', async ()=> {
           )
         })
       }) 
-    
+
       command(client, ['cc', 'clearchannel'], (message) => {
         if (message.member.hasPermission('ADMINISTRATOR')) {
           message.channel.messages.fetch().then((results) => {
@@ -143,14 +182,33 @@ client.on('ready', async ()=> {
     command(client, 'whoiscurrynoodles', (message) => {
       message.channel.send("A very cracked player :3. ")
     })
-    command(client, 'whoisaqxa', (message) => {
-      message.channel.send("Hes my dad. He is very cracked at bedwars... and if u dont think so... o-o")
-    })
     command(client, 'urmum', (message) => {
       message.channel.send("Your mums house ;)")
     }) 
-    
-
+    command(client, 'dev', (message) => {
+      message.channel.send("Made in the dark depths of ✨atlantis✨ by aqxa#1705!")
+    })
+    command(client, 'whoisgod', (message) => {
+      message.channel.send("The one and only homeozaho. (and femboys ofc uwu)")
+    }) 
+    command(client, 'ping', (message) => {
+      const embed = new Discord.MessageEmbed()
+        .setTitle("Pong!")
+        .setColor(`#FFA500`)
+        .addFields({
+          name: 'Latency',
+          value: `${Date.now() - message.createdTimestamp}ms 🏓`,
+        },
+        {
+          name: 'API Latency',
+          value: `${Math.round(client.ws.ping)}ms 📈`,
+        })
+        message.channel.send(embed)
+    })
+    command(client, 'test', (message) => {
+      message.channel.send('Test!')
+      .then(msg => msg.delete({timeout: 10000}))
+    })
     
     
 client.login(config.token)
