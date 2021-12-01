@@ -1,6 +1,0 @@
-{
-    "token": "NzY2NzY3OTAzNTA4NjYwMzE2.X4oKQg.PwhpQWIKCM_xhR_tdWCO_4UMg38",
-    "prefix": "?",
-    "mongoPath": "mongodb+srv://AdminAqxa:uI4AbsvUz8x86ZTj@cluster0.b1ukg.mongodb.net/discordBot",
-    "redisPath": "//redis-11024.c11.us-east-1-3.ec2.cloud.redislabs.com:11024?password=ioBBtHk4tvmgnIsz67dzkFrNdSSn1ckv"
-}
